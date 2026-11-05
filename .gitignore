@@ -1,0 +1,8 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+/dev/
+sessions/
+cgm/dongpo-model.json
+cgm/dongpo-model.json.tmp

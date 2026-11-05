@@ -1,0 +1,37 @@
+# agent 用户的 CODEX_HOME/config.toml 软链接到这里（只读挂载）。改完 docker compose restart。
+model = "claude-haiku-5-5"
+model_provider = "llm"
+model_context_window = 200000
+# 权限全放开：隔离靠容器和单独的 agent 用户。codex 自己的沙箱在无特权容器里起不来，
+# workspace-write 还默认断网。命令行上也会再带 --dangerously-bypass-approvals-and-sandbox。
+approval_policy = "never"
+sandbox_mode = "danger-full-access"
+# 走 Floway 配的 Tavily
+web_search = "live"
+check_for_update_on_startup = false
+
+[model_providers.llm]
+name = "llm"
+base_url = "https://api.example.com/v1"   # 运行时被 CGM_LLM_BASE_URL 覆盖
+env_key = "LLM_API_KEY"
+wire_api = "responses"
+
+# 群聊用不上的功能全关掉。每个功能都往系统提示里塞工具定义，关掉后前缀从约 18k 降到约 8k token
+[features]
+apps = false
+browser_use = false
+browser_use_external = false
+computer_use = false
+image_generation = false
+multi_agent = false
+goals = false
+plugins = false
+remote_plugin = false
+skill_search = false
+skill_mcp_dependency_install = false
+tool_suggest = false
+sleep_tool = false
+hooks = false
+guardian_approval = false
+workspace_dependencies = false
+in_app_browser = false

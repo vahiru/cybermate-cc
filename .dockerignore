@@ -1,0 +1,12 @@
+.env
+.venv
+.git
+.agents
+.codex
+.aws
+**/__pycache__
+**/*.pyc
+dev
+sessions
+tests
+work/groups

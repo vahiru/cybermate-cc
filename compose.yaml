@@ -1,0 +1,27 @@
+services:
+  cgm:
+    build: .
+    # 本机交叉构建后 docker load 到服务器，见 README「部署到远端服务器」
+    image: cybermate-cc-cgm:latest
+    restart: unless-stopped
+    init: true
+    env_file: .env
+    # 和面板、Floway 共用一台 4G 的机器，别让一次失控的 run 把它们挤掉
+    mem_limit: 1536m
+    volumes:
+      # 改人设和规则不用重建镜像，docker compose restart 即可
+      - ./work/AGENTS.md:/work/AGENTS.md:ro
+      - ./work/codex:/work/codex:ro
+      - groups:/work/groups
+      - data:/data
+      # UserBot 的加密 session（CGM_TRANSPORT=user 时用）。密文，口令在 .env 的 CGM_PASSPHRASE
+      - ./sessions:/sessions:ro
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: "5"
+
+volumes:
+  groups:
+  data:

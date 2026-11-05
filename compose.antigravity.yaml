@@ -1,0 +1,13 @@
+# docker compose -f compose.yaml -f compose.antigravity.yaml ...
+services:
+  cgm:
+    build:
+      args:
+        INSTALL_ANTIGRAVITY: "true"
+    environment:
+      CGM_BACKEND: antigravity
+    volumes:
+      - antigravity:/home/agent/.gemini
+
+volumes:
+  antigravity:

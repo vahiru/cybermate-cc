@@ -1,0 +1,15 @@
+# 主进程 + MCP server
+aiogram==3.31.0
+mcp==2.3.0
+# UserBot
+telethon==1.45.0
+cryptg==0.6.0
+cryptography==50.0.1
+# 给 agent 干活用
+numpy
+pandas
+matplotlib
+sympy
+pillow
+requests
+beautifulsoup4

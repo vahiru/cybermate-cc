@@ -1,0 +1,6 @@
+#!/bin/sh
+# 主进程（bot 用户）通过 sudo 以 agent 用户执行：agent-run codex exec ...
+# umask 002：agent 写出的文件 bot 也能读、能删（同属 cgm 组）。
+umask 002
+export PATH=/opt/venv/bin:/usr/local/bin:/usr/bin:/bin
+exec "$@"

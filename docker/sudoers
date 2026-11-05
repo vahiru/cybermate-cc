@@ -1,0 +1,3 @@
+Defaults:bot !use_pty, !lecture
+# bot 能做的事本来就比 agent 多，放开以 agent 身份执行任何命令不会多给权限
+bot ALL=(agent) NOPASSWD:SETENV: ALL
